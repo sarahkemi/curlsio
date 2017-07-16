@@ -109,7 +109,7 @@ def sign_up():
             # new_user =
             render_template("dashboard.html", form=form)
 
-@app.route("/profile")
+@app.route("/dashboard")
 def dashboard():
 	return render_template("dashboard.html")
 
