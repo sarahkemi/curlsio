@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, TextField, IntegerField
+from wtforms import StringField, SubmitField, PasswordField, TextField, IntegerField, SelectField, TextAreaField
 from wtforms import validators, ValidationError
 from wtforms.widgets import PasswordInput
 
@@ -33,16 +33,16 @@ class CitySearchForm(FlaskForm):
         FlaskForm.__init__(self, *args, **kwargs)
 
 class CreateMoveForm(FlaskForm):
-    type = StringField('Type', [validators.Required("Please choose a city.")])
-    city = StringField('City', [validators.Required("Please choose a city.")])
-    text = StringField("So what's the move?", [validators.Required("Please choose a city.")])
+    move_type = SelectField('Type', choices=[('jobs', 'Jobs'), ('entertainment', 'Entertainment'), ('hair', 'Hair'), ('religious', 'Religious'),('kids', 'Kids'),('housing', 'Housing'),('etc', 'Etc.')])
+    city = SelectField('City', choices=[('atlanta', 'Atlanta'), ('boston', 'Boston'), ('minneapolis', 'Minneapolis'), ('sanfrancisco', 'San Francisco')])
+    text = TextAreaField("So what's the move?", [validators.Required("Please enter your move.")])
     submit = SubmitField("Share move")
 
     def __init__(self, *args, **kwargs):
         FlaskForm.__init__(self, *args, **kwargs)
 
 class CommentForm(FlaskForm):
-    text = StringField('Enter your comment', [validators.Required("Please choose a city.")])
+    text = TextAreaField('Enter your comment', [validators.Required("Please choose a comment.")])
     submit = SubmitField("Post comment")
 
     def __init__(self, *args, **kwargs):
