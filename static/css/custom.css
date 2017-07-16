@@ -9,18 +9,18 @@
   padding-top: 100px;
   opacity: 0.8
 }
-.homeimg { 
-	background: url('../img/group.jpg') no-repeat center center fixed; 
+.homeimg {
+	background: url('../img/group.jpg') no-repeat center center fixed;
 	background-size: cover;
 }
 
 .signinimg {
-	background: url('../img/happy.jpg') no-repeat center center fixed; 
+	background: url('../img/happy.jpg') no-repeat center center fixed;
 	background-size: cover;
 }
 
 .signupimg {
-	background: url('../img/signup.jpg') no-repeat center center fixed; 
+	background: url('../img/signup.jpg') no-repeat center center fixed;
 	background-size: cover;
 }
 
@@ -139,4 +139,40 @@
   display: inline-block;
   margin-left: 0px;
   margin-right: 0px;
+}
+
+.sign .btn-primary {
+  background-color:#ffa7a7;
+  border-color: #ffa7a7;
+}
+
+.feed {
+  padding-top: 25px;
+}
+
+.original-post {
+  border-width:2px;
+  border-color: #429bd5;
+}
+
+.mini-profile {
+  border-right-width: 1px;
+  border-right-style: solid;
+  border-right-color: #ddd;
+}
+
+.mini-profile-bold {
+  border-right-width: 2px;
+  border-right-style: solid;
+  border-right-color: #429bd5;
+}
+
+.response-border {
+  border-left-width: 1px;
+  border-left-style: solid;
+  border-left-color: #ddd;
+}
+
+.response-box {
+  min-width:100%;
 }
