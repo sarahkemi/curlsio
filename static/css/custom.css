@@ -4,15 +4,20 @@ body {
 }
 
 .home {
-  padding-top: 250px;
+  padding-top: 100px;
   margin: 0 auto;
   max-width: 600px;
-  opacity: 0.6
+  opacity: 0.6;
+}
+
+.signinf {
+  padding-top: 25px;
+  opacity: 0.9;
 }
 
 .signup {
-  padding-top: 100px;
-  opacity: 0.8
+  padding-top: 10px;
+  opacity: 0.8;
 }
 .homeimg {
 	background: url('../img/group.jpg') no-repeat center center fixed;
