@@ -107,7 +107,7 @@ def sign_in():
               session['person_name'] = person_name
               return render_template("dashboard.html", form=form)
             else:
-              return render_template("signin.html", form=form)
+              return render_template("signin.html", form=form,session=session)
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -131,9 +131,10 @@ FROM people''')
                                       form.city.data,form.pronouns.data, form.password.data)
             return render_template("dashboard.html", form=form)
 
-@app.route("/dashboard")
-def dashboard():
-	return render_template("dashboard.html")
+@app.route("/dashboard/<type>")
+def dashboard(type):
+  moves = g.conn.execute('''(SELECT * FROM moves WHERE type = '%s')''' % type)
+  return render_template("feed.html", feed = moves)
 
 @app.route("/new", methods=["GET", "POST"])
 def moves():
@@ -160,7 +161,7 @@ def moves():
 def feed():
   current_city = g.conn.execute('''SELECT current_city from people WHERE people.person_id =(%s)''', session['person_id'])
   city = current_city.fetchone()[0]
-  feed_data = g.conn.execute('''SELECT * from moves WHERE moves.city = (%s)''', city)
+  feed_data = g.conn.execute('''SELECT * from moves WHERE moves.city = (%s) OR moves.person_asked= (%s)''', city, session['person_name'])
   return render_template("feed.html", feed=feed_data)
 
 @app.route("/post/<move_id>", methods=["GET", "POST"])
@@ -169,23 +170,24 @@ def post(move_id):
 
     if request.method == "GET":
       move = g.conn.execute('''SELECT * from moves WHERE moves.move_id = (%s)''', move_id)
-      move = move.fetchone()[5]
-      print(move)
+      fetch = move.fetchone()
+      person = fetch[4]
+      move = fetch[5]
       comments_data = g.conn.execute('''SELECT * from comments WHERE comments.move_id = (%s)''', move_id)
-      return render_template("post.html", move=move, comments=comments_data, form=form)
+      return render_template("post.html", move=move, comments=comments_data, form=form, person=person)
     elif request.method == "POST":
         if not form.validate():
             return render_template("post.html", move=move, form=form)
         else:
             num = g.conn.execute('''SELECT COUNT(comment_id) FROM comments''')
             c_id = num.fetchone()[0]
-            c_id = c_id + 1
+            c_id = c_id + 201
             today = datetime.date.today()
             g.conn.execute('''INSERT INTO comments
             (comment_id, comment, comment_date, move_id, person)
             VALUES ( (%s),(%s),(%s),(%s),(%s))''',
                                       c_id, form.text.data, today, move_id, session['person_name'])
-            return render_template("post.html", form=form)
+            return redirect(url_for('feed'))
 
 @app.route("/template")
 def template():
