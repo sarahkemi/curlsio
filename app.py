@@ -101,7 +101,7 @@ def sign_in():
               return render_template("signin.html", form=form)
 
 
-@app.route("/signup")
+@app.route("/signup", methods=["GET", "POST"])
 def sign_up():
     form = SignUpForm(csrf_enabled=False)
 
@@ -111,13 +111,16 @@ def sign_up():
         if not form.validate():
             return render_template("signup.html", form=form)
         else:
-            new_user = g.conn.execute('''INSERT INTO people
-            (name, email, race, current_city, pronouns, password)
-            VALUES ( (%s),(%s),(%s),(%s),(%s),(%s))''',
-                                      form.name.data, form.email.data, form.race.data,
-                                      form.current_city.data,form.pronouns.data, form.password.data)
-            g.conn.execute("SELECT id, name FROM students")
-            render_template("dashboard.html", form=form)
+            num = g.conn.execute('''SELECT COUNT(person_id)
+FROM people''')
+            p_id = num.fetchone()[0]
+            p_id = p_id + 1
+            g.conn.execute('''INSERT INTO people
+            (person_id, name, email, race, current_city, pronouns, password)
+            VALUES ( (%s),(%s),(%s),(%s),(%s),(%s),(%s))''',
+                                      p_id, form.name.data, form.email.data, form.race.data,
+                                      form.city.data,form.pronouns.data, form.password.data)
+            return render_template("dashboard.html", form=form)
 
 @app.route("/dashboard")
 def dashboard():
