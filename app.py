@@ -113,17 +113,25 @@ def sign_up():
 def dashboard():
 	return render_template("dashboard.html")
 
-@app.route("/moves")
+@app.route("/new")
 def moves():
     form = CreateMoveForm(csrf_enabled=False)
 
     if request.method == "GET":
-        return render_template("moves.html", form=form)
+        return render_template("new.html", form=form)
     elif request.method == "POST":
         if not form.validate():
-            return render_template("moves.html", form=form)
+            return render_template("new.html", form=form)
         else:
             return render_template("feed.html", form=form)
+
+@app.route("/feed")
+def feed():
+    return render_template("feed.html")
+
+@app.route("/post")
+def feed():
+    return render_template("post.html")
 
 @app.route("/template")
 def template():
