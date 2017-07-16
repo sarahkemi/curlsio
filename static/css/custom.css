@@ -20,3 +20,14 @@
 .sign-in .control-label {
   color: #ffa7a7;
 }
+
+.main-nav .container-fluid {
+    background-color: #ffa7a7;
+    height: 78.6px;
+}
+
+.main-nav .logo {
+  vertical-align: middle;
+}
+
+
