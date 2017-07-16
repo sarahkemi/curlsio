@@ -3,7 +3,7 @@ from wtforms import StringField, SubmitField, PasswordField, TextField, IntegerF
 from wtforms import validators, ValidationError
 from wtforms.widgets import PasswordInput
 
-class SignUpCase(FlaskForm):
+class SignUpForm(FlaskForm):
     age = IntegerField('Age')
     bio = StringField('Bio')
     city = StringField('Current City')
