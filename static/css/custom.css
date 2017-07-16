@@ -1,7 +1,27 @@
 .home {
-  padding-top: 50px;
+  padding-top: 250px;
   margin: 0 auto;
   max-width: 600px;
+  opacity: 0.6
+}
+
+.signup {
+  padding-top: 100px;
+  opacity: 0.8
+}
+.homeimg { 
+	background: url('../img/group.jpg') no-repeat center center fixed; 
+	background-size: cover;
+}
+
+.signinimg {
+	background: url('../img/happy.jpg') no-repeat center center fixed; 
+	background-size: cover;
+}
+
+.signupimg {
+	background: url('../img/signup.jpg') no-repeat center center fixed; 
+	background-size: cover;
 }
 
 .jumbotron {
@@ -13,7 +33,7 @@
 }
 
 .home .btn-success {
-  background-color:#969696;
+  background-color:#ffa7a7;
   border-color: #969696;
 }
 
@@ -23,7 +43,7 @@
 
 .main-nav .container-fluid {
     background-color: #ffa7a7;
-    height: 78.6px;
+    height: 50px;
 }
 
 .main-nav .container-fluid {
