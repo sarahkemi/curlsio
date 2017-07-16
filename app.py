@@ -115,7 +115,6 @@ def dashboard():
 
 @app.route("/moves")
 def moves():
-<<<<<<< HEAD
     form = CreateMoveForm(csrf_enabled=False)
 
     if request.method == "GET":
@@ -125,15 +124,10 @@ def moves():
             return render_template("moves.html", form=form)
         else:
             return render_template("feed.html", form=form)
-=======
-	return render_template("moves.html")
 
 @app.route("/template")
 def template():
     return render_template("template.html")
-
-
->>>>>>> ff537ebf1b1209abe61ad5045f01ab9caa0e52ef
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
