@@ -48,8 +48,8 @@ class CreateMoveForm(FlaskForm):
         FlaskForm.__init__(self, *args, **kwargs)
 
 class CommentForm(FlaskForm):
-    text = TextAreaField('Enter your comment', [validators.Required("Please choose a comment.")])
-    submit = SubmitField("Post comment")
+    text = TextAreaField('Enter your response', [validators.Required("Please choose a comment.")])
+    submit = SubmitField("Post response")
 
     def __init__(self, *args, **kwargs):
         FlaskForm.__init__(self, *args, **kwargs)
