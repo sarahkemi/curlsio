@@ -70,9 +70,9 @@
               <div class="col-sm-8 response-border">
                 <form>
                   <div class="form-group">
-                    <textarea class="form-control" rows="3"></textarea>
+                    {{ form.text(class="form-control",rows=3) }}
                   </div>
-                  <button type="submit" class="btn btn-default pull-right">Submit</button>
+                  {{ form.submit(class="btn btn-default pull-right", placeholder="submit")}}
                 </form>
               </div>
           </div>

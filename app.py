@@ -8,7 +8,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, TextField
 from wtforms import validators, ValidationError
 from flask_login import login_user,logout_user,current_user
-from forms import SignInForm, SignUpForm
+from forms import SignInForm, SignUpForm, CreateMoveForm, CitySearchForm, CommentForm
 import datetime
 import random
 import sys
@@ -131,7 +131,15 @@ def feed():
 
 @app.route("/post")
 def post():
-    return render_template("post.html")
+    form = CommentForm(csrf_enabled=False)
+
+    if request.method == "GET":
+        return render_template("post.html", form=form)
+    elif request.method == "POST":
+        if not form.validate():
+            return render_template("post.html", form=form)
+        else:
+            return render_template("post.html", form=form)
 
 @app.route("/template")
 def template():
