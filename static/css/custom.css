@@ -20,3 +20,8 @@
 .sign-in .control-label {
   color: #ffa7a7;
 }
+
+.sign .btn-primary {
+  background-color:#ffa7a7;
+  border-color: #ffa7a7;
+}
