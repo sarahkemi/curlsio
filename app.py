@@ -20,7 +20,7 @@ app.config["DEBUG"] = True  # Only include this while you are testing your app
 #
 # The following is a dummy URI that does not connect to a valid database. You will need to modify it to connect to your Part 2 database in order to use the data.
 #
-# XXX: The URI should be in the format of: 
+# XXX: The URI should be in the format of:
 #
 #     postgresql://USER:PASSWORD@104.196.135.151/proj1part2
 #
@@ -40,7 +40,7 @@ engine = create_engine(DATABASEURI)
 @app.before_request
 def before_request():
   """
-  This function is run at the beginning of every web request 
+  This function is run at the beginning of every web request
   (every time you enter an address in the web browser).
   We use it to setup a database connection that can be used throughout the request.
 
@@ -74,7 +74,7 @@ def teardown_request(exception):
 #       @app.route("/foobar/", methods=["POST", "GET"])
 #
 # PROTIP: (the trailing / in the path is important)
-# 
+#
 # see for routing: http://flask.pocoo.org/docs/0.10/quickstart/#routing
 # see for decorators: http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
 #
@@ -115,6 +115,7 @@ def dashboard():
 
 @app.route("/moves")
 def moves():
+<<<<<<< HEAD
     form = CreateMoveForm(csrf_enabled=False)
 
     if request.method == "GET":
@@ -124,6 +125,15 @@ def moves():
             return render_template("moves.html", form=form)
         else:
             return render_template("feed.html", form=form)
+=======
+	return render_template("moves.html")
+
+@app.route("/template")
+def template():
+    return render_template("template.html")
+
+
+>>>>>>> ff537ebf1b1209abe61ad5045f01ab9caa0e52ef
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")

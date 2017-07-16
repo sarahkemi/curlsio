@@ -1,0 +1,21 @@
+.home {
+  padding-top: 50px;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.container {
+}
+
+.jumbotron {
+  background-color: black;
+}
+
+.home h1,h3 {
+  color:#ffa7a7;
+}
+
+.home .btn-success {
+  background-color:#969696;
+  border-color: #969696;
+}
