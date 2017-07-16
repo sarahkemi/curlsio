@@ -7,7 +7,7 @@ from flask import Flask, request, render_template, g, redirect, Response,session
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, TextField
 from wtforms import validators, ValidationError
-from flask_login import login_user,logout_user,current_user 
+from flask_login import login_user,logout_user,current_user
 import datetime
 import random
 import sys
@@ -19,7 +19,7 @@ app.config["DEBUG"] = True  # Only include this while you are testing your app
 #
 # The following is a dummy URI that does not connect to a valid database. You will need to modify it to connect to your Part 2 database in order to use the data.
 #
-# XXX: The URI should be in the format of: 
+# XXX: The URI should be in the format of:
 #
 #     postgresql://USER:PASSWORD@104.196.135.151/proj1part2
 #
@@ -39,7 +39,7 @@ engine = create_engine(DATABASEURI)
 @app.before_request
 def before_request():
   """
-  This function is run at the beginning of every web request 
+  This function is run at the beginning of every web request
   (every time you enter an address in the web browser).
   We use it to setup a database connection that can be used throughout the request.
 
@@ -73,7 +73,7 @@ def teardown_request(exception):
 #       @app.route("/foobar/", methods=["POST", "GET"])
 #
 # PROTIP: (the trailing / in the path is important)
-# 
+#
 # see for routing: http://flask.pocoo.org/docs/0.10/quickstart/#routing
 # see for decorators: http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
 #
@@ -97,6 +97,10 @@ def dashboard():
 @app.route("/moves")
 def moves():
 	return render_template("moves.html")
+
+@app.route("/template")
+def template():
+    return render_template("template.html")
 
 
 
