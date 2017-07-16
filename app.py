@@ -48,14 +48,6 @@ def before_request():
   """
   try:
     g.conn = engine.connect()
-    ################################
-    result = g.conn.execute("select name from people")
-    for row in result:
-        print("names:", row['name'])
-    g.conn.close()
-    ##################
-
-
   except:
     print("uh oh, problem connecting to database")
     import traceback; traceback.print_exc()
@@ -91,7 +83,7 @@ def teardown_request(exception):
 def index():
     return render_template("index.html")
 
-@app.route("/signin")
+@app.route("/signin", methods=["GET", "POST"])
 def sign_in():
     form = SignInForm(csrf_enabled=False)
     if request.method == "GET":
@@ -100,10 +92,14 @@ def sign_in():
         if not form.validate():
             return render_template("signin.html", form=form)
         else:
-            match = g.conn.execute('''SELECT EXISTS (SELECT * FROM people
-            WHERE email = '%s' AND password = '%s')''' % (form.email, form.password))
-            print match
-            render_template("dashboard.html", form=form)
+            result = g.conn.execute('''SELECT EXISTS (SELECT * FROM people
+            WHERE email = '%s' AND password = '%s')''' % (form.email.data, form.password.data))
+            row = result.fetchone()
+            if row[0]:
+              return render_template("dashboard.html", form=form)
+            else:
+              return render_template("signin.html", form=form)
+
 
 @app.route("/signup")
 def sign_up():
