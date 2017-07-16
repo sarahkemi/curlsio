@@ -26,8 +26,97 @@
     height: 78.6px;
 }
 
-.main-nav .logo {
+.main-nav .container-fluid {
+  margin-bottom: 0px;
   vertical-align: middle;
 }
 
+.main-nav .navbar-header {
+  vertical-align: middle;
+  margin-top: 10px;
+}
 
+.main-nav .navbar-text {
+  color: #ffffff;
+  font-size: 34px;
+  font: Quicksand;
+  padding-left: 180px;
+  font-weight: 300;
+}
+
+.main-nav .btn-group {
+  font-color: #969696;
+  padding-top: 20px;
+}
+
+.main-nav .btn btn-default {
+  width: 90px;
+}
+
+.main-sidebar {
+  margin-top: -20px;
+  width: 100%;
+}
+
+.main-sidebar .profile-photo {
+  width: 100%;
+  display: inline-block;
+  margin-top: 70px;
+  margin-bottom: 15px;
+}
+
+.main-sidebar #circle {
+  width: 114px;
+  height: 114px;
+  -webkit-border-radius: 57px;
+  -moz-border-radius: 57px;
+  border-radius: 57px;
+  background: #eeeeee;
+  display: inline-block;
+  margin-left: 65px;
+  margin-right: 65px;
+}
+
+.main-sidebar .row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.main-sidebar .line {
+  width: 132px;
+}
+.main-sidebar .navbar-contents {
+
+}
+
+.main-sidebar #sidebar{
+  background-color: #2d2d2d;
+  height: 100%;
+  width: 240px;
+}
+
+.main-sidebar #sidebar #menu{
+  color: #ffffff;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+  font: Raleway;
+  font-size: 18px;
+  font-weight: 200;
+}
+
+.main-section {
+  height: 100%;
+}
+
+.main-section .circle {
+  width: 170px;
+  height: 170px;
+  -webkit-border-radius: 85px;
+  -moz-border-radius: 85px;
+  border-radius: 85px;
+  background: #000000;
+  display: inline-block;
+  margin-left: 0px;
+  margin-right: 0px;
+}
