@@ -130,7 +130,7 @@ def feed():
     return render_template("feed.html")
 
 @app.route("/post")
-def feed():
+def post():
     return render_template("post.html")
 
 @app.route("/template")
