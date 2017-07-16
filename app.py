@@ -84,7 +84,7 @@ def index():
 
 @app.route("/signin")
 def sign_in():
-	return "Your Name"
+	return render_template("signin.html")
 
 @app.route("/signup")
 def sign_up():
