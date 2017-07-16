@@ -23,13 +23,13 @@ class SignUpCase(FlaskForm):
         FlaskForm.__init__(self, *args, **kwargs)
 
 class SignInForm(FlaskForm):
-	email = TextField("Email",[validators.Required("Please enter your email address."),
+    email = TextField("Email",[validators.Required("Please enter your email address."),
       validators.Email("Please enter your email address.")])
-	password = StringField('Password', widget=PasswordInput(hide_value=False))
-	submit = SubmitField("Log In")
+    password = StringField('Password', widget=PasswordInput(hide_value=False))
+    submit = SubmitField("Log In")
 
     def __init__(self, *args, **kwargs):
-		FlaskForm.__init__(self, *args, **kwargs)
+        FlaskForm.__init__(self, *args, **kwargs)
 
 class CitySearchForm(FlaskForm):
     city = StringField('City', [validators.Required("Please choose a city.")])

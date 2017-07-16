@@ -8,7 +8,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, TextField
 from wtforms import validators, ValidationError
 from flask_login import login_user,logout_user,current_user
-from . import forms
+import forms
 import datetime
 import random
 import sys
@@ -125,12 +125,9 @@ def moves():
         else:
             return render_template("feed.html", form=form)
 
-
 @app.route("/template")
 def template():
     return render_template("template.html")
-
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
