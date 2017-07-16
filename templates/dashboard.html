@@ -64,19 +64,19 @@
         <h1>What's the move in...</h1>
       </div>
       <div class="row text-center">
-        <div class="col-xs-4 dash-links"><a href="#" class="big-link">add new?</a></div>
-        <div class="col-xs-4 dash-links"><a href="#" class="big-link">jobs</a></div>
-        <div class="col-xs-4 dash-links"><a href="#" class="big-link">entertainment</a></div>
+        <div class="col-xs-4 dash-links"><a href="{{url_for('moves')}}" class="big-link">add new?</a></div>
+        <div class="col-xs-4 dash-links"><a href="{{url_for('dashboard', type="Jobs" )}}" class="big-link">jobs</a></div>
+        <div class="col-xs-4 dash-links"><a href="{{url_for('dashboard', type="Entertainment" )}}" class="big-link">entertainment</a></div>
       </div>
       <div class="row text-center">
-        <div class="col-xs-4 dash-links"><a href="#" class="big-link">hair</a></div>
-        <div class="col-xs-4 dash-links"><a href="#" class="big-link">religion</a></div>
-        <div class="col-xs-4 dash-links"><a href="#" class="big-link">lifestyle</a></div>
+        <div class="col-xs-4 dash-links"><a href="{{url_for('dashboard', type="Hair" )}}" class="big-link">hair</a></div>
+        <div class="col-xs-4 dash-links"><a href="{{url_for('dashboard', type="Religion" )}}" class="big-link">religion</a></div>
+        <div class="col-xs-4 dash-links"><a href="{{url_for('dashboard', type="Lifestyle" )}}" class="big-link">lifestyle</a></div>
       </div>
       <div class="row text-center">
-        <div class="col-xs-4 dash-links"><a href="#" class="big-link">housing</a></div>
-        <div class="col-xs-4 dash-links"><a href="#" class="big-link">kids</a></div>
-        <div class="col-xs-4 dash-links"><a href="#" class="big-link">etc.</a></div>
+        <div class="col-xs-4 dash-links"><a href="{{url_for('dashboard', type="Housing" )}}" class="big-link">housing</a></div>
+        <div class="col-xs-4 dash-links"><a href="{{url_for('dashboard', type="Kids" )}}" class="big-link">kids</a></div>
+        <div class="col-xs-4 dash-links"><a href="{{url_for('dashboard', type="all")}}" class="big-link">etc.</a></div>
       </div>
     </div>
   </div>
