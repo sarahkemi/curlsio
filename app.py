@@ -8,6 +8,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, TextField
 from wtforms import validators, ValidationError
 from flask_login import login_user,logout_user,current_user
+from . import forms
 import datetime
 import random
 import sys
@@ -84,11 +85,29 @@ def index():
 
 @app.route("/signin")
 def sign_in():
-	return "Your Name"
+    form = SignInForm(csrf_enabled=False)
+
+    if request.method == "GET":
+        return render_template("signin.html", form=form)
+    elif request.method == "POST":
+        if not form.validate():
+            return render_template("signin.html", form=form)
+        else:
+            # new_user =
+            render_template("dashboard.html", form=form)
 
 @app.route("/signup")
 def sign_up():
-	return render_template("signup.html")
+    form = SignUpForm(csrf_enabled=False)
+
+    if request.method == "GET":
+        return render_template("signup.html", form=form)
+    elif request.method == "POST":
+        if not form.validate():
+            return render_template("signup.html", form=form)
+        else:
+            # new_user =
+            render_template("dashboard.html", form=form)
 
 @app.route("/profile")
 def dashboard():
@@ -96,7 +115,16 @@ def dashboard():
 
 @app.route("/moves")
 def moves():
-	return render_template("moves.html")
+    form = CreateMoveForm(csrf_enabled=False)
+
+    if request.method == "GET":
+        return render_template("moves.html", form=form)
+    elif request.method == "POST":
+        if not form.validate():
+            return render_template("moves.html", form=form)
+        else:
+            return render_template("feed.html", form=form)
+
 
 @app.route("/template")
 def template():
