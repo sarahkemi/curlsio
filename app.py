@@ -111,7 +111,12 @@ def sign_up():
         if not form.validate():
             return render_template("signup.html", form=form)
         else:
-            # new_user =
+            new_user = g.conn.execute('''INSERT INTO people
+            (name, email, race, current_city, pronouns, password)
+            VALUES ( (%s),(%s),(%s),(%s),(%s),(%s))''',
+                                      form.name.data, form.email.data, form.race.data,
+                                      form.current_city.data,form.pronouns.data, form.password.data)
+            g.conn.execute("SELECT id, name FROM students")
             render_template("dashboard.html", form=form)
 
 @app.route("/dashboard")
