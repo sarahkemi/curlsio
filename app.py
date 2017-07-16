@@ -8,7 +8,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, TextField
 from wtforms import validators, ValidationError
 from flask_login import login_user,logout_user,current_user
-from . import forms
+import forms
 import datetime
 import random
 import sys
