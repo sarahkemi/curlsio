@@ -7,10 +7,20 @@
 
 .signup {
   padding-top: 100px;
-  opacity: 0.6
+  opacity: 0.8
 }
 .homeimg { 
 	background: url('../img/group.jpg') no-repeat center center fixed; 
+	background-size: cover;
+}
+
+.signinimg {
+	background: url('../img/happy.jpg') no-repeat center center fixed; 
+	background-size: cover;
+}
+
+.signupimg {
+	background: url('../img/signup.jpg') no-repeat center center fixed; 
 	background-size: cover;
 }
 
