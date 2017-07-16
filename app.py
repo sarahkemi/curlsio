@@ -98,9 +98,10 @@ def sign_in():
             row = result.fetchone()
 
             if row[0]:
-              person = g.conn.execute('''(SELECT * FROM people WHERE email = '%s' AND password = '%s')''' % (form.email.data, form.password.data))
-              person_id = person.fetchone()[0]
-              person_name = person.fetchone()[9]
+              person = g.conn.execute('''(SELECT * FROM people WHERE email = '%s' AND password = '%s' LIMIT 1)''' % (form.email.data, form.password.data))
+              person_id = (person.fetchone()[0])
+              peeps = g.conn.execute('''(SELECT * FROM people WHERE email = '%s' AND password = '%s' LIMIT 1)''' % (form.email.data, form.password.data))
+              person_name = (peeps.fetchone()[9])
               session['email'] = form.email.data
               session['person_id'] = person_id
               session['person_name'] = person_name
@@ -152,7 +153,7 @@ def moves():
             (move_id, type, city, date, person_asked, move_text)
             VALUES ( (%s),(%s),(%s),(%s),(%s),(%s))''',
                                       m_id, form.move_type.data, form.city.data, today,
-                                      session['person_id'], form.text.data)
+                                      session['person_name'], form.text.data)
             return redirect(url_for('feed'))
 
 @app.route("/feed", methods=["GET", "POST"])
@@ -183,7 +184,7 @@ def post(move_id):
             g.conn.execute('''INSERT INTO comments
             (comment_id, comment, comment_date, move_id, person)
             VALUES ( (%s),(%s),(%s),(%s),(%s))''',
-                                      c_id, form.text.data, today, move_id, "Fredrick Kofi Tam")
+                                      c_id, form.text.data, today, move_id, session['person_name'])
             return render_template("post.html", form=form)
 
 @app.route("/template")
