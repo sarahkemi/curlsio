@@ -100,8 +100,10 @@ def sign_in():
             if row[0]:
               person = g.conn.execute('''(SELECT * FROM people WHERE email = '%s' AND password = '%s')''' % (form.email.data, form.password.data))
               person_id = person.fetchone()[0]
+              person_name = person.fetchone()[9]
               session['email'] = form.email.data
               session['person_id'] = person_id
+              session['person_name'] = person_name
               return render_template("dashboard.html", form=form)
             else:
               return render_template("signin.html", form=form)
@@ -153,20 +155,35 @@ def moves():
                                       session['person_id'], form.text.data)
             return redirect(url_for('feed'))
 
-@app.route("/feed")
+@app.route("/feed", methods=["GET", "POST"])
 def feed():
-    return render_template("feed.html")
+  current_city = g.conn.execute('''SELECT current_city from people WHERE people.person_id =(%s)''', session['person_id'])
+  city = current_city.fetchone()[0]
+  feed_data = g.conn.execute('''SELECT * from moves WHERE moves.city = (%s)''', city)
+  return render_template("feed.html", feed=feed_data)
 
-@app.route("/post")
-def post():
+@app.route("/post/<move_id>", methods=["GET", "POST"])
+def post(move_id):
     form = CommentForm(csrf_enabled=False)
 
     if request.method == "GET":
-        return render_template("post.html", form=form)
+      move = g.conn.execute('''SELECT * from moves WHERE moves.move_id = (%s)''', move_id)
+      move = move.fetchone()[5]
+      print(move)
+      comments_data = g.conn.execute('''SELECT * from comments WHERE comments.move_id = (%s)''', move_id)
+      return render_template("post.html", move=move, comments=comments_data, form=form)
     elif request.method == "POST":
         if not form.validate():
-            return render_template("post.html", form=form)
+            return render_template("post.html", move=move, form=form)
         else:
+            num = g.conn.execute('''SELECT COUNT(comment_id) FROM comments''')
+            c_id = num.fetchone()[0]
+            c_id = c_id + 1
+            today = datetime.date.today()
+            g.conn.execute('''INSERT INTO comments
+            (comment_id, comment, comment_date, move_id, person)
+            VALUES ( (%s),(%s),(%s),(%s),(%s))''',
+                                      c_id, form.text.data, today, move_id, "Fredrick Kofi Tam")
             return render_template("post.html", form=form)
 
 @app.route("/template")
