@@ -34,7 +34,7 @@ class CitySearchForm(FlaskForm):
 
 class CreateMoveForm(FlaskForm):
     move_type = SelectField('Type', choices=[('jobs', 'Jobs'), ('entertainment', 'Entertainment'), ('hair', 'Hair'), ('religious', 'Religious'),('kids', 'Kids'),('housing', 'Housing'),('etc', 'Etc.')])
-    city = SelectField('City', choices=[('atlanta', 'Atlanta'), ('boston', 'Boston'), ('minneapolis', 'Minneapolis'), ('sanfrancisco', 'San Francisco')])
+    city = SelectField('City', choices=[('Atlanta', 'Atlanta'), ('Boston', 'Boston'), ('Minneapolis', 'Minneapolis'), ('San Francisco', 'San Francisco')])
     text = TextAreaField("So what's the move?", [validators.Required("Please enter your move.")])
     submit = SubmitField("Share move")
 

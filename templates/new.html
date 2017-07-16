@@ -13,9 +13,10 @@
   <body>
     <div class="container">
       <div class="new">
+      <h3> Make your moves </h3>
         <div class="panel panel-default">
           <div class="panel-body">
-            <form>
+            <form method="POST">
               <div class="form-group">
                 <label for="city">City</label>
                 {{ form.city(class="form-control",placeholder="City") }}
@@ -39,4 +40,12 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="static/js/bootstrap.min.js"></script>
   </body>
+  <div id="footer">
+  <div class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container">
+      <p class="navbar-text pull-left">© 2017 - Built with <span class="glyphicon glyphicon-heart"></span> By Moves .Inc
+      </p>
+      </div>
+    </div>
+</div>
 </html>

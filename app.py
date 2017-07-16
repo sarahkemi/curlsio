@@ -15,6 +15,7 @@ import sys
 import requests
 
 app = Flask(__name__)
+app.secret_key = 'super secret key'
 app.config["DEBUG"] = True  # Only include this while you are testing your app
 
 #
@@ -95,7 +96,12 @@ def sign_in():
             result = g.conn.execute('''SELECT EXISTS (SELECT * FROM people
             WHERE email = '%s' AND password = '%s')''' % (form.email.data, form.password.data))
             row = result.fetchone()
+
             if row[0]:
+              person = g.conn.execute('''(SELECT * FROM people WHERE email = '%s' AND password = '%s')''' % (form.email.data, form.password.data))
+              person_id = person.fetchone()[0]
+              session['email'] = form.email.data
+              session['person_id'] = person_id
               return render_template("dashboard.html", form=form)
             else:
               return render_template("signin.html", form=form)
@@ -126,7 +132,7 @@ FROM people''')
 def dashboard():
 	return render_template("dashboard.html")
 
-@app.route("/new")
+@app.route("/new", methods=["GET", "POST"])
 def moves():
     form = CreateMoveForm(csrf_enabled=False)
 
@@ -136,7 +142,16 @@ def moves():
         if not form.validate():
             return render_template("new.html", form=form)
         else:
-            return render_template("feed.html", form=form)
+            num = g.conn.execute('''SELECT COUNT(move_id) FROM moves''')
+            m_id = num.fetchone()[0]
+            m_id = m_id + 1
+            today = datetime.date.today()
+            g.conn.execute('''INSERT INTO moves
+            (move_id, type, city, date, person_asked, move_text)
+            VALUES ( (%s),(%s),(%s),(%s),(%s),(%s))''',
+                                      m_id, form.move_type.data, form.city.data, today,
+                                      session['person_id'], form.text.data)
+            return redirect(url_for('feed'))
 
 @app.route("/feed")
 def feed():
